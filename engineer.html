@@ -1,0 +1,712 @@
+    <!-- نافذة رسالة خطأ إضافة المهندس (منبثقة منسقة) -->
+    <div class="add-error-modal" id="addErrorModal" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:10001;opacity:0;visibility:hidden;transition:all 0.3s ease;">
+        <div style="background:white;width:95%;max-width:400px;border-radius:20px;box-shadow:0 25px 50px rgba(0,0,0,0.25);padding:2rem;text-align:center;">
+            <h3 style="color:#ff6b6b;margin-bottom:1.5rem;">تنبيه!</h3>
+            <p id="addErrorText" style="font-size:1.1rem;color:#333;margin-bottom:2rem;">يرجى تعبئة جميع الحقول المطلوبة ورفع صورة الهوية الشخصية قبل إضافة المهندس.</p>
+            <button id="closeAddErrorModal" style="background:#ff6b6b;color:white;padding:0.8rem 1.5rem;border-radius:10px;font-weight:600;cursor:pointer;font-size:1rem;border:none;">موافق</button>
+        </div>
+    </div>
+    <!-- نافذة رسالة خطأ الحجز -->
+    <div class="booking-error-modal" id="bookingErrorModal" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:10001;opacity:0;visibility:hidden;transition:all 0.3s ease;">
+        <div style="background:white;width:95%;max-width:400px;border-radius:20px;box-shadow:0 25px 50px rgba(0,0,0,0.25);padding:2rem;text-align:center;">
+            <h3 style="color:#c0392b;margin-bottom:1.5rem;">خطأ في البيانات</h3>
+            <p style="font-size:1.1rem;color:#333;margin-bottom:2rem;">الرجاء تعبئة جميع الحقول المطلوبة</p>
+            <button id="closeBookingErrorModal" style="background:linear-gradient(135deg,#c0392b,#e74c3c);color:white;padding:0.8rem 1.5rem;border-radius:10px;font-weight:600;cursor:pointer;font-size:1rem;border:none;">حسناً</button>
+        </div>
+    </div>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حجز المهندسين - CareerIQ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="engineer.css">
+        
+</head>
+<body>
+    <!-- شريط التنقل المحدث -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="Img/logo.jpg" alt="CareerIQ Logo">
+                    <span>CareerIQ</span>
+                </a>
+                
+                <nav>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li class="dropdown">
+                            <a href="#">الفئات <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-content">
+                                <a href="medic.html"><i class="fas fa-user-md"></i> الأطباء</a>
+                                <a href="engineer.html" class="active"><i class="fas fa-laptop-code"></i> المهندسين</a>
+                                <a href="#"><i class="fas fa-chalkboard-teacher"></i> المعلمين</a>
+                                <a href="#"><i class="fas fa-briefcase"></i> الاستشاريين</a>
+                                <a href="#"><i class="fas fa-dumbbell"></i> المدربين</a>
+                                <a href="#"><i class="fas fa-paint-brush"></i> المصممين</a>
+                                <a href="#"><i class="fas fa-balance-scale"></i> المحامين</a>
+                            </div>
+                        </li>
+                        <li><a href="howtobooking.html">كيفية الحجز</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="auth-buttons">
+                  
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- قسم البطل -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>حجز موعد مع أفضل المهندسين</h1>
+            <p>اختر من بين نخبة المهندسين المختصين واحجز موعدك بسهولة</p>
+        </div>
+    </section>
+
+    <!-- قسم البحث والتصفية -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="ابحث عن مهندس أو تخصص...">
+                </div>
+                
+                <div class="filter-box">
+                    <select id="specialtyFilter">
+                        <option value="">جميع التخصصات</option>
+                        <option value="هندسة مدنية">هندسة مدنية</option>
+                        <option value="هندسة معمارية">هندسة معمارية</option>
+                        <option value="هندسة ميكانيكية">هندسة ميكانيكية</option>
+                        <option value="هندسة كهربائية">هندسة كهربائية</option>
+                        <option value="هندسة برمجيات">هندسة برمجيات</option>
+                        <option value="هندسة كيميائية">هندسة كيميائية</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- كروت المهندسين -->
+    <section class="engineers-section">
+        <div class="container">
+            <h2 class="section-title">قائمة المهندسين المتاحين</h2>
+            
+            <!-- زر إضافة مهندس جديد في مكانه الجديد -->
+            <div class="add-engineer-container" id="addEngineerContainer">
+                <button class="btn btn-primary" id="addEngineerBtn">
+                    <i class="fas fa-user-plus"></i> إضافة مهندس جديد
+                </button>
+            </div>
+            
+            <div class="engineers-grid" id="engineersContainer">
+                <!-- سيتم تعبئة المهندسين هنا بالجافاسكريبت -->
+            </div>
+        </div>
+    </section>
+
+    <!-- فورم حجز الموعد (مخفي في البداية) -->
+    <div class="booking-modal" id="bookingModal">
+        <div class="booking-form">
+            <div class="modal-header">
+                <h3>حجز موعد</h3>
+                <button class="close-modal" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="engineer-summary">
+                    <div class="summary-image">
+                        <img id="engineerModalImage" src="" alt="صورة المهندس">
+                    </div>
+                    <div class="summary-info">
+                        <h4 id="engineerModalName">المهندس محمد أحمد</h4>
+                        <p id="engineerModalSpecialty">هندسة مدنية</p>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="clientName">الاسم الكامل</label>
+                    <input type="text" id="clientName" placeholder="الاسم الكامل للعميل">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="clientEmail">البريد الإلكتروني</label>
+                        <input type="email" id="clientEmail" placeholder="alimfth38@gmail.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="clientPhone">رقم الجوال</label>
+                        <input type="tel" id="clientPhone" placeholder="0917737286">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="appointmentDate">تاريخ الموعد</label>
+                        <input type="date" id="appointmentDate">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="appointmentTime">وقت الموعد</label>
+                        <select id="appointmentTime">
+                            <option value="">اختر الوقت</option>
+                            <option value="09:00">09:00 صباحاً</option>
+                            <option value="10:00">10:00 صباحاً</option>
+                            <option value="11:00">11:00 صباحاً</option>
+                            <option value="12:00">12:00 ظهراً</option>
+                            <option value="13:00">01:00 ظهراً</option>
+                            <option value="14:00">02:00 ظهراً</option>
+                            <option value="15:00">03:00 عصراً</option>
+                            <option value="16:00">04:00 عصراً</option>
+                            <option value="17:00">05:00 مساءً</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectDetails">تفاصيل المشروع</label>
+                    <textarea id="projectDetails" placeholder="الرجاء وصف تفاصيل المشروع"></textarea>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="back-btn" id="backToEngineers">
+                    <i class="fas fa-arrow-left"></i> العودة للمهندسين
+                </button>
+                <button class="confirm-btn" id="confirmBooking">
+                    <i class="fas fa-calendar-check"></i> تأكيد الحجز
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نموذج إضافة مهندس جديد -->
+    <!-- نافذة تفاصيل المهندس -->
+    <div class="booking-modal" id="engineerDetailsModal">
+        <div class="booking-form">
+            <div class="modal-header">
+                <h3>تفاصيل المهندس</h3>
+                <button class="close-modal" id="closeEngineerDetailsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="engineer-summary">
+                    <div class="summary-image">
+                        <img id="detailsEngineerImage" src="" alt="صورة المهندس">
+                    </div>
+                    <div class="summary-info">
+                        <h4 id="detailsEngineerName"></h4>
+                        <p id="detailsEngineerSpecialty"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>سنوات الخبرة</label>
+                    <input type="text" id="detailsEngineerExperience" readonly>
+                </div>
+                <div class="form-group">
+                    <label>مكان العمل</label>
+                    <input type="text" id="detailsEngineerLocation" readonly>
+                </div>
+                <div class="form-group">
+                    <label>الوصف</label>
+                    <textarea id="detailsEngineerDescription" readonly></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="back-btn" id="backToEngineersDetails">
+                    <i class="fas fa-arrow-left"></i> العودة للمهندسين
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- نموذج إضافة مهندس جديد -->
+    <div class="add-engineer-modal" id="addEngineerModal">
+        <div class="add-engineer-form">
+            <div class="modal-header">
+                <h3>إضافة مهندس جديد</h3>
+                <button class="close-modal" id="closeAddEngineerModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="image-preview" id="imagePreview">
+                    <i class="fas fa-hard-hat"></i>
+                </div>
+                
+                <label class="upload-btn">
+                    <i class="fas fa-upload"></i> تحميل صورة المهندس
+                    <input type="file" id="engineerImage" accept="image/*">
+                </label>
+                
+                <div class="form-group">
+                    <label for="engineerName">اسم المهندس</label>
+                    <input type="text" id="engineerName" placeholder="اسم المهندس الكامل">
+                </div>
+                
+                <div class="form-group">
+                    <label for="engineerSpecialty">التخصص</label>
+                    <select id="engineerSpecialty">
+                        <option value="">اختر التخصص</option>
+                        <option value="هندسة مدنية">هندسة مدنية</option>
+                        <option value="هندسة معمارية">هندسة معمارية</option>
+                        <option value="هندسة ميكانيكية">هندسة ميكانيكية</option>
+                        <option value="هندسة كهربائية">هندسة كهربائية</option>
+                        <option value="هندسة برمجيات">هندسة برمجيات</option>
+                        <option value="هندسة كيميائية">هندسة كيميائية</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="engineerExperience">سنوات الخبرة</label>
+                    <input type="text" id="engineerExperience" placeholder="عدد سنوات الخبرة">
+                </div>
+                
+                <div class="form-group">
+                    <label for="engineerLocation">مكان العمل</label>
+                    <input type="text" id="engineerLocation" placeholder="مكان العمل">
+                </div>
+                
+                <div class="form-group">
+                    <label for="engineerDescription">الوصف</label>
+                    <textarea id="engineerDescription" placeholder="وصف مختصر عن المهندس"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="engineerIdImage">صورة الهوية الشخصية <span style='color:red'>(إجباري)</span></label>
+                    <input type="file" id="engineerIdImage" accept="image/*" required>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="back-btn" id="cancelAddEngineer">
+                    <i class="fas fa-times"></i> إلغاء
+                </button>
+                <button class="confirm-btn" id="addEngineerConfirm">
+                    <i class="fas fa-plus"></i> إضافة المهندس
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- نافذة رسالة نجاح إضافة المهندس -->
+    <div class="add-success-modal" id="addSuccessModal" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:10001;opacity:0;visibility:hidden;transition:all 0.3s ease;">
+        <div style="background:white;width:95%;max-width:400px;border-radius:20px;box-shadow:0 25px 50px rgba(0,0,0,0.25);padding:2rem;text-align:center;">
+            <h3 style="color:#1a3a5f;margin-bottom:1.5rem;">تم استلام بياناتك بنجاح</h3>
+            <p style="font-size:1.2rem;color:#333;margin-bottom:2rem;">سيتم اضافتك الي الموقع خلال 24 ساعة</p>
+            <button id="closeSuccessModal" style="background:linear-gradient(135deg,#FF7A00,#FF9E45);color:white;padding:0.8rem 1.5rem;border-radius:10px;font-weight:600;cursor:pointer;font-size:1rem;border:none;">حسناً</button>
+        </div>
+    </div>
+    <!-- نافذة رسالة نجاح الحجز -->
+    <div class="booking-success-modal" id="bookingSuccessModal" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:10001;opacity:0;visibility:hidden;transition:all 0.3s ease;">
+        <div style="background:white;width:95%;max-width:400px;border-radius:20px;box-shadow:0 25px 50px rgba(0,0,0,0.25);padding:2rem;text-align:center;">
+            <h3 style="color:#1a3a5f;margin-bottom:1.5rem;">تم تأكيد الحجز بنجاح!</h3>
+            <p id="bookingSuccessText" style="font-size:1.1rem;color:#333;margin-bottom:2rem;"></p>
+            <button id="closeBookingSuccessModal" style="background:linear-gradient(135deg,#1a3a5f,#2c5e92);color:white;padding:0.8rem 1.5rem;border-radius:10px;font-weight:600;cursor:pointer;font-size:1rem;border:none;">حسناً</button>
+        </div>
+    </div>
+            </div>
+        </div>
+    </div>
+    <!-- رسالة تسجيل الدخول المطلوبة -->
+    <div class="login-required-modal" id="loginRequiredModal">
+        <div class="login-message-box">
+            <div class="message-header">
+                <h3>تسجيل الدخول مطلوب</h3>
+            </div>
+            <div class="message-body">
+                <p>يجب عليك تسجيل الدخول لتوظيف مهندس/p>
+                <p>سجل دخولك الآن للاستفادة من خدماتنا كاملة</p>
+            </div>
+            <div class="message-footer">
+                <button class="login-btn" id="goToLoginBtn">
+                    <i class="fas fa-sign-in-alt"></i> الانتقال لتسجيل الدخول
+                </button>
+                <button class="cancel-btn" id="cancelLoginBtn">
+                    <i class="fas fa-times"></i> إلغاء
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- تذييل الصفحة المحسن -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="contact-info">
+                    <h3>أتصل بنا</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> طرابلس، ليبيا</li>
+                        <li><i class="fas fa-phone"></i> 218917737286+</li>
+                        <li><i class="fas fa-envelope"></i> info@careeriq.ly</li>
+                        <li><i class="fas fa-clock"></i> الأحد - الخميس: 8 صباحاً - 5 مساءً</li>
+                    </ul>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="copyright">
+                    <p>جميع الحقوق محفوظة &copy; 2025 منصة CareerIQ</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // بيانات المهندسين
+        let engineers = [
+            {
+                id: 1,
+                name: "م. محمد أحمد",
+                specialty: "هندسة مدنية",
+                image: "Engimg/images.jpeg",
+                experience: "12 سنة خبرة",
+                location: "طرابلس, ليبيا",
+                description: "مهندس مدني متخصص في التصميم والتنفيذ، حاصل على شهادة PMP في إدارة المشاريع"
+            },
+            {
+                id: 2,
+                name: "م. سارة الخالد",
+                specialty: "هندسة معمارية",
+                image: "Engimg/download.jpeg",
+                experience: "10 سنة خبرة",
+                location: "بنغازي, ليبيا",
+                description: "مهندسة معمارية متخصصة في التصميم المستدام، حاصلة على جوائز عالمية في التصميم المعماري"
+            },
+            {
+                id: 3,
+                name: "م. خالد سليمان",
+                specialty: "هندسة كهربائية",
+                image: "Engimg/ElectricMan.jpeg",
+                experience: "14 سنة خبرة",
+                location: "طرابلس, ليبيا",
+                description: "مهندس كهرباء متخصص في أنظمة الطاقة المتجددة، حاصل على شهادة مهندس محترف"
+            }
+        ];
+
+        // DOM جاهز
+        document.addEventListener('DOMContentLoaded', function() {
+            const engineersContainer = document.getElementById('engineersContainer');
+            const searchInput = document.getElementById('searchInput');
+            const specialtyFilter = document.getElementById('specialtyFilter');
+            const bookingModal = document.getElementById('bookingModal');
+            const closeModal = document.getElementById('closeModal');
+            const backToEngineers = document.getElementById('backToEngineers');
+            const confirmBooking = document.getElementById('confirmBooking');
+            const engineerModalImage = document.getElementById('engineerModalImage');
+            const engineerModalName = document.getElementById('engineerModalName');
+            const engineerModalSpecialty = document.getElementById('engineerModalSpecialty');
+            const addEngineerBtn = document.getElementById('addEngineerBtn');
+            const addEngineerContainer = document.getElementById('addEngineerContainer');
+            const addEngineerModal = document.getElementById('addEngineerModal');
+            const closeAddEngineerModalBtn = document.getElementById('closeAddEngineerModal');
+            const cancelAddEngineer = document.getElementById('cancelAddEngineer');
+            const addEngineerConfirm = document.getElementById('addEngineerConfirm');
+            const engineerImage = document.getElementById('engineerImage');
+            const imagePreview = document.getElementById('imagePreview');
+            const loginRequiredModal = document.getElementById('loginRequiredModal');
+            const goToLoginBtn = document.getElementById('goToLoginBtn');
+            const cancelLoginBtn = document.getElementById('cancelLoginBtn');
+            
+            let currentEngineer = null;
+            let newEngineerImage = null;
+
+
+            // التحقق من حالة تسجيل الدخول بشكل دقيق
+            function isUserLoggedIn() {
+                const userData = localStorage.getItem('user');
+                return userData !== null && userData !== undefined;
+            }
+            
+            // تحديث عرض زر الإضافة حسب نوع الحساب
+            function updateAddButtonVisibility() {
+                const userType = localStorage.getItem('userType') || 'user';
+                if (userType === 'client') {
+                    addDoctorContainer.style.display = 'block';
+                } else {
+                    addDoctorContainer.style.display = 'none';
+                }
+            }
+            
+            // إظهار رسالة تسجيل الدخول المطلوبة
+            function showLoginRequired() {
+                loginRequiredModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // إخفاء رسالة تسجيل الدخول المطلوبة
+            function hideLoginRequired() {
+                loginRequiredModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            
+            }
+            
+            // عرض المهندسين
+            function renderEngineers(engineersList) {
+                engineersContainer.innerHTML = '';
+                engineersList.forEach((engineer) => {
+                    const card = document.createElement('div');
+                    card.className = 'engineer-card';
+                    // زر توظيف يظهر للجميع
+                    let hireBtnHtml = `<button class="hire-btn" data-id="${engineer.id}"><i class="fas fa-calendar-check"></i> توظيف</button>`;
+                    card.innerHTML = `
+                        <div class="engineer-image">
+                            <img src="${engineer.image}" alt="${engineer.name}">
+                        </div>
+                        <div class="engineer-info">
+                            <h3 class="engineer-name">${engineer.name}</h3>
+                            <p class="engineer-specialty">${engineer.specialty}</p>
+                            <div class="engineer-details">
+                                <div><i class="fas fa-briefcase"></i> ${engineer.experience}</div>
+                                <div><i class="fas fa-map-marker-alt"></i> ${engineer.location}</div>
+                            </div>
+                            <div class="card-actions">
+                                ${hireBtnHtml}
+                                <button class="details-btn" data-id="${engineer.id}"><i class="fas fa-info-circle"></i> التفاصيل</button>
+                            </div>
+                        </div>
+                    `;
+                    engineersContainer.appendChild(card);
+                });
+                
+                // إضافة أحداث لزر توظيف
+                document.querySelectorAll('.hire-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const engineerId = parseInt(this.getAttribute('data-id'));
+                        currentEngineer = engineers.find(e => e.id === engineerId);
+                      // بدون التحقق من تسجيل الدخول
+                        openBookingModal(currentEngineer);
+                    });
+                });
+                
+                // إضافة أحداث لزر التفاصيل
+                document.querySelectorAll('.details-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const engineerId = parseInt(this.getAttribute('data-id'));
+                        const engineer = engineers.find(e => e.id === engineerId);
+                        document.getElementById('detailsEngineerImage').src = engineer.image;
+                        document.getElementById('detailsEngineerImage').alt = engineer.name;
+                        document.getElementById('detailsEngineerName').textContent = engineer.name;
+                        document.getElementById('detailsEngineerSpecialty').textContent = engineer.specialty;
+                        document.getElementById('detailsEngineerExperience').value = engineer.experience;
+                        document.getElementById('detailsEngineerLocation').value = engineer.location;
+                        document.getElementById('detailsEngineerDescription').value = engineer.description;
+                        document.getElementById('engineerDetailsModal').classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    });
+                });
+            }
+            
+            // فتح فورم الحجز
+            function openBookingModal(engineer) {
+                engineerModalImage.src = engineer.image;
+                engineerModalImage.alt = engineer.name;
+                engineerModalName.textContent = engineer.name;
+                engineerModalSpecialty.textContent = engineer.specialty;
+                
+                // تعيين تاريخ اليوم كحد أدنى
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('appointmentDate').min = today;
+                
+                // مسح حقول النموذج
+                document.getElementById('clientName').value = '';
+                document.getElementById('clientEmail').value = '';
+                document.getElementById('clientPhone').value = '';
+                document.getElementById('appointmentDate').value = '';
+                document.getElementById('appointmentTime').value = '';
+                document.getElementById('projectDetails').value = '';
+                
+                bookingModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // إغلاق فورم الحجز
+            function closeBookingModal() {
+                bookingModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            // فتح نموذج إضافة مهندس
+            function openAddEngineerModal() {
+                // مسح حقول النموذج
+                document.getElementById('engineerName').value = '';
+                document.getElementById('engineerSpecialty').value = '';
+                document.getElementById('engineerExperience').value = '';
+                document.getElementById('engineerLocation').value = '';
+                document.getElementById('engineerDescription').value = '';
+                
+                // إعادة تعيين معاينة الصورة
+                imagePreview.innerHTML = '<i class="fas fa-hard-hat"></i>';
+                newEngineerImage = null;
+                
+                addEngineerModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // إغلاق نموذج إضافة مهندس
+            function closeAddEngineerModal() {
+                addEngineerModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            // تصفية المهندسين حسب البحث والتخصص
+            function filterEngineers() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const specialty = specialtyFilter.value;
+                
+                const filtered = engineers.filter(engineer => {
+                    const matchesSearch = engineer.name.toLowerCase().includes(searchTerm) || 
+                                         engineer.specialty.toLowerCase().includes(searchTerm) ||
+                                         engineer.description.toLowerCase().includes(searchTerm);
+                    const matchesSpecialty = specialty === '' || engineer.specialty === specialty;
+                    
+                    return matchesSearch && matchesSpecialty;
+                });
+                
+                renderEngineers(filtered);
+            }
+            
+            // معاينة صورة المهندس
+            engineerImage.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        newEngineerImage = e.target.result;
+                        imagePreview.innerHTML = `<img src="${newEngineerImage}" alt="صورة المهندس">`;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // إضافة مهندس جديد
+            function addNewEngineer() {
+                const name = document.getElementById('engineerName').value;
+                const specialty = document.getElementById('engineerSpecialty').value;
+                const experience = document.getElementById('engineerExperience').value;
+                const location = document.getElementById('engineerLocation').value;
+                const description = document.getElementById('engineerDescription').value;
+                const idImageInput = document.getElementById('engineerIdImage');
+                if (!name || !specialty || !experience || !location || !description || !idImageInput.files[0]) {
+                    // عرض رسالة منبثقة منسقة فقط ولا تغلق نافذة الإضافة
+                    var addErrorModal = document.getElementById('addErrorModal');
+                    addErrorModal.style.opacity = '1';
+                    addErrorModal.style.visibility = 'visible';
+                    document.body.style.overflow = 'hidden';
+                    // زر موافق يغلق فقط الرسالة المنبثقة
+                    var closeAddErrorModalBtn = document.getElementById('closeAddErrorModal');
+                    closeAddErrorModalBtn.onclick = function() {
+                        addErrorModal.style.opacity = '0';
+                        addErrorModal.style.visibility = 'hidden';
+                        document.body.style.overflow = 'auto';
+                    };
+                    return;
+                }
+                // لا يتم إضافة المهندس مباشرة
+                closeAddEngineerModal();
+                // عرض نافذة الرسالة
+                const addSuccessModal = document.getElementById('addSuccessModal');
+                addSuccessModal.style.opacity = '1';
+                addSuccessModal.style.visibility = 'visible';
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // أحداث البحث والتصفية
+            searchInput.addEventListener('input', filterEngineers);
+            specialtyFilter.addEventListener('change', filterEngineers);
+            
+            // أحداث الفورم
+            closeModal.addEventListener('click', closeBookingModal);
+            backToEngineers.addEventListener('click', closeBookingModal);
+            
+            confirmBooking.addEventListener('click', function() {
+                const clientName = document.getElementById('clientName').value;
+                const appointmentDate = document.getElementById('appointmentDate').value;
+                const appointmentTime = document.getElementById('appointmentTime').value;
+                if (!clientName || !appointmentDate || !appointmentTime) {
+                    // عرض نافذة خطأ
+                    const bookingErrorModal = document.getElementById('bookingErrorModal');
+                    bookingErrorModal.style.opacity = '1';
+                    bookingErrorModal.style.visibility = 'visible';
+                    document.body.style.overflow = 'hidden';
+                    return;
+                }
+                const formattedDate = new Date(appointmentDate).toLocaleDateString('ar-SA');
+                // رسالة تأكيد الحجز في نافذة خاصة
+                closeBookingModal();
+                setTimeout(() => {
+                    const bookingSuccessModal = document.getElementById('bookingSuccessModal');
+                    const bookingSuccessText = document.getElementById('bookingSuccessText');
+                    bookingSuccessText.innerHTML = `المهندس: ${currentEngineer.name}<br>التاريخ: ${formattedDate}<br>الوقت: ${appointmentTime}<br><br>سيصلك تأكيد بالبريد الإلكتروني والرسائل النصية`;
+                    bookingSuccessModal.style.opacity = '1';
+                    bookingSuccessModal.style.visibility = 'visible';
+                    document.body.style.overflow = 'hidden';
+                }, 300);
+            });
+            // إغلاق نافذة خطأ الحجز
+            document.getElementById('closeBookingErrorModal').addEventListener('click', function() {
+                const bookingErrorModal = document.getElementById('bookingErrorModal');
+                bookingErrorModal.style.opacity = '0';
+                bookingErrorModal.style.visibility = 'hidden';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // أحداث إضافة مهندس
+            // إغلاق نافذة تفاصيل المهندس
+            document.getElementById('closeEngineerDetailsModal').addEventListener('click', function() {
+                document.getElementById('engineerDetailsModal').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            document.getElementById('backToEngineersDetails').addEventListener('click', function() {
+                document.getElementById('engineerDetailsModal').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            addEngineerBtn.addEventListener('click', openAddEngineerModal);
+            closeAddEngineerModalBtn.addEventListener('click', closeAddEngineerModal);
+            cancelAddEngineer.addEventListener('click', closeAddEngineerModal);
+            addEngineerConfirm.addEventListener('click', addNewEngineer);
+            // إغلاق نافذة الرسالة بعد الإضافة
+            document.getElementById('closeSuccessModal').addEventListener('click', function() {
+                const addSuccessModal = document.getElementById('addSuccessModal');
+                addSuccessModal.style.opacity = '0';
+                addSuccessModal.style.visibility = 'hidden';
+                document.body.style.overflow = 'auto';
+            });
+            // إغلاق نافذة نجاح الحجز
+            document.getElementById('closeBookingSuccessModal').addEventListener('click', function() {
+                const bookingSuccessModal = document.getElementById('bookingSuccessModal');
+                bookingSuccessModal.style.opacity = '0';
+                bookingSuccessModal.style.visibility = 'hidden';
+                document.body.style.overflow = 'auto';
+            });
+             // أحداث رسالة تسجيل الدخول
+            goToLoginBtn.addEventListener('click', function() {
+                window.location.href = 'login.html';
+            });
+            
+            cancelLoginBtn.addEventListener('click', hideLoginRequired);
+            
+            // إظهار المهندسين عند التحميل
+            renderEngineers(engineers);
+            updateAddButtonVisibility();
+        });
+    </script>
+    <script src="dropdown.js"></script>
+    <!-- <script src="script.js"></script> -->
+</body>
+</html>

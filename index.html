@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerIQ - منصة حجز مواعيد للمحترفين</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    
+</head>
+<body>
+    <!-- شريط التنقل المحدث -->
+    <header>
+        <div class="container"> 
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="Img/logo.jpg" alt="CareerIQ Logo">
+                    <span>CareerIQ</span>
+                </a>
+                
+                <nav>
+                    <ul>
+                        <li><a href="index.html"class=active>الرئيسية</a></li>
+                        <li class="dropdown">
+                            <a href="#">الفئات <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-content">
+                                <a href="medic.html"><i class="fas fa-user-md"></i> الأطباء</a>
+                                <a href="engineer.html"><i class="fas fa-laptop-code"></i> المهندسين</a>
+                                <a href="#"><i class="fas fa-chalkboard-teacher"></i> المعلمين</a>
+                                <a href="#"><i class="fas fa-briefcase"></i> الاستشاريين</a>
+                                <a href="#"><i class="fas fa-dumbbell"></i> المدربين</a>
+                                <a href="#"><i class="fas fa-paint-brush"></i> المصممين</a>
+                                <a href="#"><i class="fas fa-balance-scale"></i> المحامين</a>
+                            </div>
+                        </li>
+                        <li><a href="howtobooking.html" >كيفية الحجز</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="auth-buttons">
+                    <button class="btn btn-primary" id="registerBtn">
+                        <i class="fas fa-user-plus"></i> تسجيل دخول
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- قسم البطل -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>احجز موعدك مع أفضل المحترفين بسهولة</h1>
+            <p>طبيب، مهندس، مدرب، معلم؟ احصل على أفضل الخدمات من خلال حجز موعدك بخطوات بسيطة وسريعة</p>
+ 
+        </div>
+    </section>
+
+    <!-- معلومات عن الموقع -->
+    <section class="about-careeriq">
+        <h2>عن CareerIQ</h2>
+        <p>
+            CareerIQ منصة رائدة تهدف إلى ربط الباحثين عن التطوير المهني مع أفضل الخبراء في مختلف المجالات. نساعدك على اكتشاف فرص جديدة، تطوير مهاراتك، وحجز جلسات مع محترفين معتمدين بسهولة وأمان. نقدم تجربة فريدة تجمع بين الجودة والكفاءة لضمان حصولك على الخدمة المثالية التي تستحقها.
+        </p>
+    </section>
+        
+    <!-- قسم المؤسسين -->
+    <section class="founders-section">
+        <h3>المؤسسون</h3>
+        <div class="founders-container">
+            <!-- Founder Card 1 -->
+            <div class="founder-card">
+                <img src="ImgFounders/user1.jpg" alt="أحمد صالح">
+                <h4>أحمد صالح</h4>
+                <div class="position">المدير التنفيذي</div>
+                <p>رائد أعمال بخبرة واسعة في تطوير المنصات الرقمية وقيادة فرق العمل نحو النجاح والتميز في مجال التكنولوجيا.</p>
+            </div>
+            <!-- Founder Card 2 -->
+            <div class="founder-card">
+                <img src="ImgFounders/founder2.png" alt="عبد الرحمن الساسي ">
+                <h4>عبد الرحمن  الساسي</h4>
+                <div class="position">مدير العمليات</div>
+                <p>متخصصة في إدارة المشاريع وتطوير العمليات لضمان أفضل تجربة للمستخدمين مع التركيز على الجودة والابتكار.</p>
+            </div>
+            
+        </div>
+    </section>
+
+    
+
+    <!-- تذييل الصفحة المحسن -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="contact-info">
+                    <h3>أتصل بنا</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> طرابلس, ليبيا</li>
+                        <li><i class="fas fa-phone"></i> 218917737286+</li>
+                        <li><i class="fas fa-envelope"></i> info@careeriq.ly</li>
+                        <li><i class="fas fa-clock"></i> الأحد - الخميس: 8 صباحاً - 5 مساءً</li>
+                    </ul>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="copyright">
+                    <p>جميع الحقوق محفوظة &copy; 2025 منصة CareerIQ</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerBtn = document.getElementById('registerBtn');
+
+            // تفعيل القائمة المنسدلة للفئات عند الضغط
+            const dropdown = document.querySelector('.dropdown');
+            const dropdownContent = document.querySelector('.dropdown-content');
+            let dropdownOpen = false;
+
+            dropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdownOpen = !dropdownOpen;
+                if (dropdownOpen) {
+                    dropdownContent.style.display = 'block';
+                } else {
+                    dropdownContent.style.display = 'none';
+                }
+            });
+
+            // إغلاق القائمة عند الضغط خارجها
+            document.addEventListener('click', function(e) {
+                if (dropdownOpen && !dropdown.contains(e.target)) {
+                    dropdownContent.style.display = 'none';
+                    dropdownOpen = false;
+                }
+            });
+
+            // إضافة تأثيرات للروابط
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                });
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+
+            // تأثيرات الأقسام عند التمرير
+            const sections = document.querySelectorAll('section');
+            function animateOnScroll() {
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    if (sectionTop < windowHeight * 0.75) {
+                        section.style.opacity = '1';
+                        section.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+            // تهيئة العناصر
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            });
+            setTimeout(animateOnScroll, 300);
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+    <!-- في نهاية جميع الصفحات قبل </body> -->
+<script src="dropdown.js"></script>
+<script src="script.js"></script> 
+</body>
+</html>

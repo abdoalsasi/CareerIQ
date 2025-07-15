@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerIQ - إنشاء حساب جديد</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="singup.css">
+       
+</head>
+<body>
+    <!-- شريط التنقل المحدث -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                   <img src="Img/logo.jpg" alt="CareerIQ Logo">
+                    <span>CareerIQ</span>
+                </a>
+                
+                <nav>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li class="dropdown">
+                            <a href="#">الفئات <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-content">
+                                <a href="medic.html"><i class="fas fa-user-md"></i> الأطباء</a>
+                                <a href="engineer.html"><i class="fas fa-laptop-code"></i> المهندسين</a>
+                                <a href="#"><i class="fas fa-chalkboard-teacher"></i> المعلمين</a>
+                                <a href="#"><i class="fas fa-briefcase"></i> الاستشاريين</a>
+                                <a href="#"><i class="fas fa-dumbbell"></i> المدربين</a>
+                                <a href="#"><i class="fas fa-paint-brush"></i> المصممين</a>
+                                <a href="#"><i class="fas fa-balance-scale"></i> المحامين</a>
+                            </div>
+                        </li>
+                        <li><a href="howtobooking.html" >كيفية الحجز</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="auth-buttons">
+                    <button class="btn btn-primary" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- قسم تسجيل الدخول -->
+    <section class="register-section">
+        <div class="container">
+            <div class="register-container">
+                <div class="register-left">
+                    <h2>انضم إلى مجتمع CareerIQ</h2>
+                    <p>سجل حسابك الآن للوصول إلى آلاف المحترفين وخدماتنا المميزة وإدارة مواعيدك بكل سهولة</p>
+                    
+                    <ul class="features-list">
+                        <li><i class="fas fa-check-circle"></i> وصول سريع إلى آلاف المحترفين</li>
+                        <li><i class="fas fa-calendar-check"></i> إدارة مواعيدك بسهولة</li>
+                        <li><i class="fas fa-star"></i> تقييم الخبرات والخدمات</li>
+                        <li><i class="fas fa-bell"></i> تذكير بمواعيدك القادمة</li>
+                        <li><i class="fas fa-shield-alt"></i> حماية وأمان للبيانات</li>
+                    </ul>
+                </div>
+                
+                <div class="register-right">
+                    <h2>إنشاء حساب جديد</h2>
+                    <p class="register-subtitle">املأ النموذج أدناه لإنشاء حساب جديد</p>
+                    
+                    <div id="alertContainer"></div>
+                    
+                    <form id="registerForm">
+                        <!-- اختيار نوع الحساب: مستخدم أو عميل -->
+                        <div class="user-type-selector">
+                            <div class="user-type-option">
+                                <input type="radio" id="user" name="userType" value="user">
+                                <label for="user">
+                                    <i class="fas fa-user"></i>
+                                    مستخدم
+                                </label>
+                            </div>
+                            <div class="user-type-option">
+                                <input type="radio" id="client" name="userType" value="client" checked>
+                                <label for="client">
+                                    <i class="fas fa-user-tie"></i>
+                                    مزود خدمة
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="name-fields">
+                            <div class="form-group">
+                                <label for="firstName">الاسم الأول</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-user field-icon"></i>
+                                    <input type="text" id="firstName" class="form-control" placeholder="أدخل اسمك الأول" required>
+                                </div>
+                                <small id="firstNameError" class="error-message"></small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="lastName">اسم العائلة</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-user field-icon"></i>
+                                    <input type="text" id="lastName" class="form-control" placeholder="أدخل اسم العائلة" required>
+                                </div>
+                                <small id="lastNameError" class="error-message"></small>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-envelope field-icon"></i>
+                                <input type="email" id="email" class="form-control" placeholder="example@careeriq.com" required>
+                            </div>
+                            <small id="emailError" class="error-message"></small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">رقم الهاتف</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-phone field-icon"></i>
+                                <input type="tel" id="phone" class="form-control" placeholder="09XXXXXXXX" required>
+                            </div>
+                            <small id="phoneError" class="error-message"></small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">كلمة المرور</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock field-icon"></i>
+                                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                                <span class="password-toggle" id="passwordToggle">
+                                    <i class="fas fa-eye"></i>
+                                </span>
+                            </div>
+                            <small id="passwordError" class="error-message"></small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword">تأكيد كلمة المرور</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock field-icon"></i>
+                                <input type="password" id="confirmPassword" class="form-control" placeholder="••••••••" required>
+                                <span class="password-toggle" id="confirmPasswordToggle">
+                                    <i class="fas fa-eye"></i>
+                                </span>
+                            </div>
+                            <small id="confirmPasswordError" class="error-message"></small>
+                        </div>
+                        
+                        <div class="terms-conditions">
+                            <input type="checkbox" id="terms" required>
+                            <label for="terms">أوافق على <a href="#">الشروط والأحكام</a> و<a href="#">سياسة الخصوصية</a></label>
+                        </div>
+                        <small id="termsError" class="error-message"></small>
+                        
+                        <button type="submit" class="register-btn">
+                            إنشاء حساب <i class="fas fa-user-plus"></i>
+                        </button>
+                    </form>
+                    
+                    <div class="login-link">
+                        لديك حساب بالفعل؟ <a href="#">سجل الدخول الآن</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- تذييل الصفحة المحسن -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="contact-info">
+                    <h3>أتصل بنا</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> طرابلس، ليبيا</li>
+                        <li><i class="fas fa-phone"></i> 218917737286+</li>
+                        <li><i class="fas fa-envelope"></i> info@careeriq.ly</li>
+                        <li><i class="fas fa-clock"></i> الأحد - الخميس: 8 صباحاً - 5 مساءً</li>
+                    </ul>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="copyright">
+                    <p>جميع الحقوق محفوظة &copy; 2025 منصة CareerIQ</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // تعريف المتغيرات
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const passwordToggle = document.getElementById('passwordToggle');
+            const confirmPasswordToggle = document.getElementById('confirmPasswordToggle');
+            
+            // وظيفة إظهار/إخفاء كلمة المرور
+            function togglePasswordVisibility(input, toggle) {
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    toggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+                } else {
+                    input.type = 'password';
+                    toggle.innerHTML = '<i class="fas fa-eye"></i>';
+                }
+            }
+            
+            // إضافة مستمعي الأحداث لأزرار إظهار كلمة المرور
+            passwordToggle.addEventListener('click', function() {
+                togglePasswordVisibility(passwordInput, passwordToggle);
+            });
+            
+            confirmPasswordToggle.addEventListener('click', function() {
+                togglePasswordVisibility(confirmPasswordInput, confirmPasswordToggle);
+            });
+            
+            // وظيفة إظهار رسالة تنبيه
+            function showAlert(message, type) {
+                const alertContainer = document.getElementById('alertContainer');
+                const alert = document.createElement('div');
+                alert.className = `alert alert-${type}`;
+                
+                if (type === 'success') {
+                    alert.innerHTML = `
+                        <i class="fas fa-check-circle"></i>
+                        <div>${message}</div>
+                    `;
+                } else {
+                    alert.innerHTML = `
+                        <i class="fas fa-exclamation-circle"></i>
+                        <div>${message}</div>
+                    `;
+                }
+                
+                alertContainer.innerHTML = '';
+                alertContainer.appendChild(alert);
+                
+                // إخفاء الرسالة بعد 5 ثوانٍ
+                setTimeout(() => {
+                    alert.style.opacity = '0';
+                    alert.style.transform = 'translateY(-20px)';
+                    setTimeout(() => {
+                        alert.remove();
+                    }, 500);
+                }, 5000);
+            }
+            
+            // وظيفة التحقق من صحة البريد الإلكتروني
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            
+            // وظيفة التحقق من صحة رقم الهاتف (ليبي)
+            function isValidSaudiPhone(phone) {
+                const phoneRegex = /^(09)(1|2|3|4|)([0-9]{7})$/;
+                return phoneRegex.test(phone);
+            }
+            
+            // وظيفة التحقق من صحة كلمة المرور
+            function isValidPassword(password) {
+                return password.length >= 8;
+            }
+            
+            // وظيفة التحقق من تطابق كلمتي المرور
+            function passwordsMatch(password, confirmPassword) {
+                return password === confirmPassword;
+            }
+            
+            // التحقق في الوقت الحقيقي
+            const firstNameInput = document.getElementById('firstName');
+            const lastNameInput = document.getElementById('lastName');
+            const emailInput = document.getElementById('email');
+            const phoneInput = document.getElementById('phone');
+            const termsCheckbox = document.getElementById('terms');
+            
+            const firstNameError = document.getElementById('firstNameError');
+            const lastNameError = document.getElementById('lastNameError');
+            const emailError = document.getElementById('emailError');
+            const phoneError = document.getElementById('phoneError');
+            const passwordError = document.getElementById('passwordError');
+            const confirmPasswordError = document.getElementById('confirmPasswordError');
+            const termsError = document.getElementById('termsError');
+            
+            if (firstNameInput) {
+                firstNameInput.addEventListener('input', function() {
+                    if (!firstNameInput.value.trim()) {
+                        firstNameInput.classList.add('error');
+                        firstNameError.textContent = 'الاسم الأول مطلوب';
+                    } else {
+                        firstNameInput.classList.remove('error');
+                        firstNameError.textContent = '';
+                    }
+                });
+            }
+            
+            if (lastNameInput) {
+                lastNameInput.addEventListener('input', function() {
+                    if (!lastNameInput.value.trim()) {
+                        lastNameInput.classList.add('error');
+                        lastNameError.textContent = 'اسم العائلة مطلوب';
+                    } else {
+                        lastNameInput.classList.remove('error');
+                        lastNameError.textContent = '';
+                    }
+                });
+            }
+            
+            if (emailInput) {
+                emailInput.addEventListener('input', function() {
+                    if (!emailInput.value) {
+                        emailInput.classList.add('error');
+                        emailError.textContent = 'البريد الإلكتروني مطلوب';
+                    } else if (!isValidEmail(emailInput.value)) {
+                        emailInput.classList.add('error');
+                        emailError.textContent = 'الرجاء إدخال بريد إلكتروني صحيح';
+                    } else {
+                        emailInput.classList.remove('error');
+                        emailError.textContent = '';
+                    }
+                });
+            }
+            
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function() {
+                    if (!phoneInput.value) {
+                        phoneInput.classList.add('error');
+                        phoneError.textContent = 'رقم الهاتف مطلوب';
+                    } else if (!isValidSaudiPhone(phoneInput.value)) {
+                        phoneInput.classList.add('error');
+                        phoneError.textContent = 'الرجاء إدخال رقم هاتف ليبي صحيح (مثال:0917737286)';
+                    } else {
+                        phoneInput.classList.remove('error');
+                        phoneError.textContent = '';
+                    }
+                });
+            }
+            
+            if (passwordInput) {
+                passwordInput.addEventListener('input', function() {
+                    if (!passwordInput.value) {
+                        passwordInput.classList.add('error');
+                        passwordError.textContent = 'كلمة المرور مطلوبة';
+                    } else if (!isValidPassword(passwordInput.value)) {
+                        passwordInput.classList.add('error');
+                        passwordError.textContent = 'كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل';
+                    } else {
+                        passwordInput.classList.remove('error');
+                        passwordError.textContent = '';
+                        
+                        // التحقق من تطابق كلمتي المرور إذا كانت كلمة المرور الثانية مدخلة
+                        if (confirmPasswordInput.value && !passwordsMatch(passwordInput.value, confirmPasswordInput.value)) {
+                            confirmPasswordInput.classList.add('error');
+                            confirmPasswordError.textContent = 'كلمتا المرور غير متطابقتين';
+                        } else {
+                            confirmPasswordInput.classList.remove('error');
+                            confirmPasswordError.textContent = '';
+                        }
+                    }
+                });
+            }
+            
+            if (confirmPasswordInput) {
+                confirmPasswordInput.addEventListener('input', function() {
+                    if (!confirmPasswordInput.value) {
+                        confirmPasswordInput.classList.add('error');
+                        confirmPasswordError.textContent = 'تأكيد كلمة المرور مطلوب';
+                    } else if (!passwordsMatch(passwordInput.value, confirmPasswordInput.value)) {
+                        confirmPasswordInput.classList.add('error');
+                        confirmPasswordError.textContent = 'كلمتا المرور غير متطابقتين';
+                    } else {
+                        confirmPasswordInput.classList.remove('error');
+                        confirmPasswordError.textContent = '';
+                    }
+                });
+            }
+            
+            if (termsCheckbox) {
+                termsCheckbox.addEventListener('change', function() {
+                    if (!termsCheckbox.checked) {
+                        termsError.textContent = 'يجب الموافقة على الشروط والأحكام';
+                    } else {
+                        termsError.textContent = '';
+                    }
+                });
+            }
+            
+            // تسجيل الدخول
+            const registerForm = document.getElementById('registerForm');
+            
+            if (registerForm) {
+                registerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const firstName = firstNameInput.value.trim();
+                    const lastName = lastNameInput.value.trim();
+                    const email = emailInput.value;
+                    const phone = phoneInput.value;
+                    const password = passwordInput.value;
+                    const confirmPassword = confirmPasswordInput.value;
+                    const userType = document.querySelector('input[name="userType"]:checked').value;
+                    const termsAccepted = termsCheckbox.checked;
+                    
+                    // إعادة تعيين رسائل الخطأ
+                    firstNameError.textContent = '';
+                    lastNameError.textContent = '';
+                    emailError.textContent = '';
+                    phoneError.textContent = '';
+                    passwordError.textContent = '';
+                    confirmPasswordError.textContent = '';
+                    termsError.textContent = '';
+                    
+                    firstNameInput.classList.remove('error');
+                    lastNameInput.classList.remove('error');
+                    emailInput.classList.remove('error');
+                    phoneInput.classList.remove('error');
+                    passwordInput.classList.remove('error');
+                    confirmPasswordInput.classList.remove('error');
+                    
+                    let isValid = true;
+                    
+                    // التحقق من الاسم الأول
+                    if (!firstName) {
+                        firstNameInput.classList.add('error');
+                        firstNameError.textContent = 'الاسم الأول مطلوب';
+                        isValid = false;
+                    }
+                    
+                    // التحقق من اسم العائلة
+                    if (!lastName) {
+                        lastNameInput.classList.add('error');
+                        lastNameError.textContent = 'اسم العائلة مطلوب';
+                        isValid = false;
+                    }
+                    
+                    // التحقق من البريد الإلكتروني
+                    if (!email) {
+                        emailInput.classList.add('error');
+                        emailError.textContent = 'البريد الإلكتروني مطلوب';
+                        isValid = false;
+                    } else if (!isValidEmail(email)) {
+                        emailInput.classList.add('error');
+                        emailError.textContent = 'الرجاء إدخال بريد إلكتروني صحيح';
+                        isValid = false;
+                    }
+                    
+                    // التحقق من رقم الهاتف
+                    if (!phone) {
+                        phoneInput.classList.add('error');
+                        phoneError.textContent = 'رقم الهاتف مطلوب';
+                        isValid = false;
+                    } else if (!isValidSaudiPhone(phone)) {
+                        phoneInput.classList.add('error');
+                        phoneError.textContent = 'الرجاء إدخال رقم هاتف ليبي صحيح (مثال: 0917737286)';
+                        isValid = false;
+                    }
+                    
+                    // التحقق من كلمة المرور
+                    if (!password) {
+                        passwordInput.classList.add('error');
+                        passwordError.textContent = 'كلمة المرور مطلوبة';
+                        isValid = false;
+                    } else if (!isValidPassword(password)) {
+                        passwordInput.classList.add('error');
+                        passwordError.textContent = 'كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل';
+                        isValid = false;
+                    }
+                    
+                    // التحقق من تأكيد كلمة المرور
+                    if (!confirmPassword) {
+                        confirmPasswordInput.classList.add('error');
+                        confirmPasswordError.textContent = 'تأكيد كلمة المرور مطلوب';
+                        isValid = false;
+                    } else if (!passwordsMatch(password, confirmPassword)) {
+                        confirmPasswordInput.classList.add('error');
+                        confirmPasswordError.textContent = 'كلمتا المرور غير متطابقتين';
+                        isValid = false;
+                    }
+                    
+                    // التحقق من الموافقة على الشروط
+                    if (!termsAccepted) {
+                        termsError.textContent = 'يجب الموافقة على الشروط والأحكام';
+                        isValid = false;
+                    }
+                    
+                    if (!isValid) return;
+                    
+                    // إنشاء عنصر تحميل
+                    const registerBtn = registerForm.querySelector('.register-btn');
+                    const originalBtnText = registerBtn.innerHTML;
+                    
+                    registerBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري إنشاء الحساب';
+                    registerBtn.disabled = true;
+                    
+                    // محاكاة اتصال بالخادم
+                    setTimeout(() => {
+
+                        
+                        showAlert('تم إنشاء حسابك بنجاح! سيتم توجيهك إلى الصفحة الرئيسية.', 'success');
+                        
+                        // توجيه المستخدم إلى الصفحة الرئيسية
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 2000);
+                        
+                        registerBtn.innerHTML = originalBtnText;
+                        registerBtn.disabled = false;
+                    }, 2000);
+                });
+            }
+            
+        });
+    </script>
+    <script src="dropdown.js"></script>
+</body>
+</html>
